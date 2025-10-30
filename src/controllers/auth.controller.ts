@@ -9,7 +9,6 @@ const APP_SECRET = appConfig.app.secret;
 
 const loginUser: RequestHandler = async (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
     let user = await UserModel.findOne({ username });
     if (!user) {
         return res.status(404).send({
@@ -36,7 +35,8 @@ const loginUser: RequestHandler = async (req, res) => {
 }
 
 const registerUser: RequestHandler = async (req, res) => {
-    const { displayName, username, password } = req.body;
+    console.log('body =',req.body)
+    const { displayName, username, password , gender } = req.body;
     const avatarFile = req.file;
     try {
         if (!displayName || !username || !password) {
@@ -65,6 +65,7 @@ const registerUser: RequestHandler = async (req, res) => {
             avatar: avatarFile ? avatarFile.filename : undefined,
             displayName,
             username,
+            gender,
             password: passwordHash
         });
 
