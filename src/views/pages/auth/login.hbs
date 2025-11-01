@@ -1,3 +1,4 @@
+<div class="w-full h-full flex justify-center items-center">
   <div class="card bg-base-100 w-96 shadow-sm">
     <div class="card-body">
       <h2 class="card-title justify-center">Login</h2>
@@ -6,25 +7,13 @@
           <label class="label">
             <span class="label-text">Username</span>
           </label>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            class="input input-bordered w-full"
-            required
-          />
+          <input type="text" name="username" placeholder="username" class="input input-bordered w-full" required />
         </div>
         <div class="form-control">
           <label class="label">
             <span class="label-text">Password</span>
           </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            class="input input-bordered w-full"
-            required
-          />
+          <input type="password" name="password" placeholder="password" class="input input-bordered w-full" required />
         </div>
         <div class="flex flex-row justify-end">
           <a href="/register" class="link link-primary">Create an account</a>
@@ -62,7 +51,7 @@
         window.location.href = result.redirectTo || '/';
       }, 1000);
     } else {
-      msg.error(result.message || 'Login failed');  
+      msg.error(result.message || 'Login failed');
     }
   });
 </script>

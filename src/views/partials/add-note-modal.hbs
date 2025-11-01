@@ -1,19 +1,98 @@
 <dialog id="add_note_modal" class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">Add Note</h3>
+    <p class="text-sm font-extralight">
+      Add a note to quickly jot down important information for later reference.
+    </p>
+    <hr class="mt-2 bg-red-500" />
     <form id="add-note-form" class="mt-4 flex flex-col gap-4">
-      <div class="form-control space-y-0.5">
-        <label class="label">
-          <span class="label-text">Display Name</span>
+      <div class="flex flex-row gap-2">
+        <div class="form-control w-full flex flex-col gap-1">
+          <label class="label px-0.5 flex flex-col justify-start items-start">
+            <span class="label-text">Title</span>
+          </label>
+          <input type="text" name="title" placeholder="Title" class="input input-bordered w-full" required />
+        </div>
+        <div class="form-control w-24 flex flex-col gap-1">
+          <label class="label px-0.5">
+            <span class="label-text">Color</span>
+          </label>
+          <input type="color" name="bgColor" placeholder="Due Date" class="input input-bordered w-full" required />
+        </div>
+      </div>
+      <div class="form-control w-full flex flex-col gap-1">
+        <label class="label px-0.5">
+          <span class="label-text">Content</span>
         </label>
-        <input
-          type="text"
-          name="displayName"
-          placeholder="Display Name"
-          class="input input-bordered w-full"
-          required
-        />
+        <textarea name="content" class="textarea w-full" placeholder="Content" rows="6"></textarea>
+      </div>
+
+      <div class="flex flex-row justify-end gap-4">
+        <button type="button" class="btn btn-outline" onclick="closeModal('add_note_modal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add Note</button>
       </div>
     </form>
   </div>
 </dialog>
+
+<script>
+  const addNoteForm = document.getElementById('add-note-form');
+  addNoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userDataRaw = localStorage.getItem('user');
+    if (!userDataRaw) {
+      msg.error('User not logged in.');
+      return;
+    }
+    const userData = JSON.parse(userDataRaw);
+    const userId = userData._id;
+    const formData = new FormData(addNoteForm);
+    let data = Object.fromEntries(formData.entries());
+    data.userId = userId;
+    try {
+      const response = await fetch('/api/v1/notes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        msg.success('Note added successfully!');
+        closeModal('add_note_modal');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        const errorData = await response.json();
+        msg.error(`Error: ${errorData.message || 'Failed to add note.'}`);
+      }
+    } catch (error) {
+      msg.error(`Error: ${error.message || 'Failed to add note.'}`);
+    }
+  });
+
+  (() => {
+    function openModal(id) {
+      const dlg = document.getElementById(id);
+      if (!dlg) return;
+      if (typeof dlg.showModal === 'function') dlg.showModal(); // แนะนำใช้ showModal()
+      else dlg.setAttribute('open', ''); // fallback
+    }
+
+    function closeModal(id) {
+      const dlg = document.getElementById(id);
+      if (!dlg) return;
+      if (typeof dlg.close === 'function') dlg.close();
+      dlg.removeAttribute('open'); // เผื่อกรณีเปิดด้วย setAttribute
+      // ถ้าเคยไปใช้โหมด checkbox/เพิ่ม class เปิด modal เอง ให้เอาออกด้วย
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    }
+
+    // ทำให้เรียกได้จาก onclick
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+  })();
+</script>

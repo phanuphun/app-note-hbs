@@ -1,6 +1,7 @@
 import { Router } from "express";
-import apiAuthRoute from "./auh.router";
+import apiAuthRoute from "./auth.router";
 import appConfig from "../../configs/index.config";
+import noteRouter from "./notes.router";
 
 const APP_NAME = appConfig.app.name;
 const APP_DESCRIPTION = appConfig.app.description;
@@ -17,5 +18,6 @@ apiAppRouter.get('/health', (req, res) => {
 });
 
 apiAppRouter.use("/auth", apiAuthRoute);
+apiAppRouter.use("/notes", noteRouter);
 
 export default apiAppRouter;

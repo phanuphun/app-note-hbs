@@ -1,21 +1,23 @@
 <div class="navbar bg-base-100 shadow-sm">
-  <div class="flex-1">
-    <div class="flex flex-row gap-4 items-center">
-      <a class="btn btn-ghost text-xl" href="/">First Note</a>
-      <div class="flex flex-row gap-2">
-        <button class="btn" id="user-mnt">User Management</button>
+  <div class="w-full flex flex-row px-2">
+    <div class="flex-1">
+      <div class="flex flex-row gap-4 items-center">
+        <a class="btn btn-ghost text-xl" href="/">First Note</a>
+        <div class="flex flex-row gap-2">
+          {{!-- <button class="btn" id="user-mnt">User Management</button> --}}
+        </div>
       </div>
     </div>
-  </div>
-  <div id="auth-guest" class="flex flex-row gap-2 invisible">
-    <a class="btn" href="/register">Register</a>
-    <a class="btn" href="/login">Login</a>
-  </div>
+    <div id="auth-guest" class="flex flex-row gap-2 invisible">
+      <a class="btn" href="/register">Register</a>
+      <a class="btn" href="/login">Login</a>
+    </div>
 
-  <div id="auth-user" class="flex flex-row gap-2 items-center hidden invisible">
-    <button class="btn" id="btn-add-note" onclick="add_note_modal.showModal()">Add Note</button>
-    <button class="btn" id="btn-account">Account</button>
-    <button id="btn-logout" class="btn btn-outline btn-error">Logout</button>
+    <div id="auth-user" class="flex flex-row gap-2 items-center hidden invisible">
+      <button class="btn" id="btn-add-note" onclick="add_note_modal.showModal()">Add Note</button>
+      <button class="btn" id="btn-account">Account</button>
+      <button id="btn-logout" class="btn btn-outline btn-error">Logout</button>
+    </div>
   </div>
 </div>
 
@@ -52,13 +54,7 @@
     const accountBtn = document.getElementById('btn-account');
 
     accountBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      const u = getStoredUser();
-      if (u && u._id) {
-        window.location.href = `/account/${u._id}`;
-      } else {
-        msg.error('User ID not found');
-      }
+
     });
 
     const loggedIn = isLoggedIn();

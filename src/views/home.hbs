@@ -1,1 +1,40 @@
-<h1>Home Page</h1>
+<div class="flex flex-col w-full gap-4">
+    <div class="w-full flex flex-row justify-between">
+        <div class="flex-1"></div>
+        <div class="flex flex-row gap-4 justify-end items-center">
+            <div class="form-control w-96">
+                <input type="text" placeholder="Search notes..." class="w-full input input-bordered" />
+            </div>
+            <button class="btn btn-neutral">Search</button>
+        </div>
+    </div>
+
+    <!-- responsive grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {{#if notes.length}}
+        {{#each notes}}
+        <div class="card card-sm shadow-sm bg-white">
+            <div class="card-body">
+                <div class="card-action">
+                    <div class="w-full flex flex-row gap-2 justify-end">
+                        <button class="btn btn-sm btn- btn-outline">
+                            Edit
+                        </button>
+                        <button class="btn btn-sm btn- btn-error btn-outline">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                <h3 class="card-title text-xl">{{title}}</h3>
+                <div class="h-[240px] max-h-[240px] overflow-auto">
+                    <p class="text-sm break-words">{{content}}</p>
+                </div>
+                <div class="text-xs opacity-60 mt-2">Created: {{createdAt}}</div>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="text-center text-sm opacity-60">No notes found</div>
+        {{/if}}
+    </div>
+</div>
