@@ -4,30 +4,31 @@ This repository is a minimal workshop to learn the basics of the Handlebars temp
 
 ## directory
 ```txt
-- public/
-- src
-  - configs
-    - hbs.config.ts     # Handlebars engine config 
-    - ...
-  - controllers/
-  - middlewares/
-  - models/
-  - routers
-    - api/
-    - web/              # SSR routes
-  - schemas/
-  - services/
-  - types/
-  - utils
-    - hbs.ts            # Define Handlebars helpers 
-  - views/
-    - layout
-      - main.hbs        # Base layout (Wrapper)
-    - partials/         # Components
-    - ...
-  - app.ts
-  - server.ts
-- ...
+.
+├── public/
+├── src/
+│   ├── configs/
+│   │   ├── hbs.config.ts     # Handlebars engine config 
+│   │   └── ...
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routers/
+│   │   ├── api/
+│   │   └── web/                # SSR routes
+│   ├── schemas/
+│   ├── services/
+│   ├── types/
+│   ├── utils/
+│   │   └── hbs.ts              # Define Handlebars helpers 
+│   ├── views/
+│   │   ├── layout/
+│   │   │   └── main.hbs        # Base layout (Wrapper)
+│   │   ├── partials/           # Components
+│   │   └── ...
+│   ├── app.ts
+│   └── server.ts
+└── ...
 ```
 
 ## Installation
