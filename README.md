@@ -5,7 +5,7 @@ This repository is a minimal workshop to learn the basics of the Handlebars temp
 ## Installation
 ### Environment Setup
 1. `git clone <repository-url`
-2. `cd chat-room`
+2. `cd <repo-name>`
 3. `npm install`
 4. `cp .env.example .env`
 
